@@ -26,30 +26,6 @@ void push(stack_t **stack, int n)
 }
 
 /**
- * pop - Removes the top element of the stack.
- * @stack: A pointer to the top of the stack.
- * @line_number: The line number in the Monty bytecode file.
- */
-void pop(stack_t **stack, unsigned int line_number)
-{
-	stack_t *temp;
-
-	if (!*stack)
-	{
-		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-
-	temp = *stack;
-
-	*stack = (*stack)->next;
-
-	if (*stack)
-		(*stack)->prev = NULL;
-	free(temp);
-
-}
-/**
  * pall - Prints all the values of the stack
  * @stack: a pointer to the stack
  * @line: the line number in the monty bytecode file
@@ -65,4 +41,73 @@ void pall(stack_t **stack, unsigned int line)
 		printf("%d\n", current->n);
 		current = current->next;
 	}
+}
+/**
+ * process_line - Prints all the values of the stack
+ * @stack: a pointer to the stack
+ * @line: the line number in the monty bytecode file
+ * @ln: the line number in the monty bytecode file
+ * @len: the line number in the monty bytecode file
+ */
+void process_line(char *line, size_t len, unsigned int *ln, stack_t **stack)
+{
+	char *opcode, *arg;
+	(void)len;
+	opcode = strtok(line, " \t\n");
+
+	if (opcode != NULL && *opcode != '#')
+		return;
+
+	arg = strtok(NULL, " \t\n");
+
+	execute_instruction(opcode, arg, *ln, stack);
+}
+
+/**
+ * execute_instruction - Prints all the values of the stack
+ * @arg: a pointer to the stack
+ * @ln: the line number in the monty bytecode file
+ * @stack: the line number in the monty bytecode file
+ * @op: the line number in the monty bytecode file
+ */
+void execute_instruction(char *op, char *arg, unsigned int ln, stack_t **stack)
+{
+	if (strcmp(op, "push") == 0)
+	{
+		if (arg == NULL)
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", ln);
+			exit(EXIT_FAILURE);
+		}
+
+		push(stack, atoi(arg));
+	}
+	else if (strcmp(op, "pall") == 0)
+	{
+		pall(stack, ln);
+	}
+	else
+	{
+		fprintf(stderr, "L%d: unknown instruction %s\n", ln, op);
+		exit(EXIT_FAILURE);
+	}
+
+}
+/**
+ * free_stack - Frees a stack.
+ * @stack: Pointer to the top of the stack.
+ */
+void free_stack(stack_t **stack)
+{
+	stack_t *current = *stack;
+	stack_t *next;
+
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+
+	*stack = NULL;
 }
