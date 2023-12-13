@@ -52,6 +52,10 @@ void parse_and_execute(FILE *f, char *line, stack_t **stack, unsigned int *ln)
 	{
 		pint(stack, *ln);
 	}
+	else if (strcmp(opcode, "pop") == 0)
+	{
+		pop(stack, *ln);
+	}
 	else
 	{
 		handle_error(f, line, *stack, "L", *ln);
