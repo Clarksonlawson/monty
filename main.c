@@ -60,6 +60,10 @@ void parse_and_execute(FILE *f, char *line, stack_t **stack, unsigned int *ln)
 	{
 		swap(stack, *ln);
 	}
+	else if (strcmp(opcode, "add") == 0)
+	{
+		add(stack, *ln);
+	}
 	else
 	{
 		handle_error(f, line, *stack, "L", *ln);
