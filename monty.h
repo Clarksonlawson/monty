@@ -42,5 +42,6 @@ void execute_opcode(char *opcode, unsigned int line_number);
 void process_line(char *line, size_t len, unsigned int *line_number, stack_t **stack);
 void execute_instruction(char *opcode, char *arg, unsigned int line_number, stack_t **stack);
 void free_stack(stack_t **stack);
+void pint(stack_t **stack, unsigned int line_number);
 #endif /* MONTY_H */
 
