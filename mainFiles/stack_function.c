@@ -7,22 +7,18 @@
  */
 void handle_mul_nodes(stack_t **stack, unsigned int line)
 {
-	int sumOperation;
+	int sum;
 
-	if (stack == NULL || *stack == NULL)
-	{
+	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 		handle_more_error(8, line, "mul");
-	}
-	if ((*stack)->next == NULL)
-	{
-		handle_more_error(8, line, "mul");
-	}
+
 	(*stack) = (*stack)->next;
-	sumOperation = (*stack)->n * (*stack)->prev->n;
-	(*stack)->n = sumOperation;
+	sum = (*stack)->n * (*stack)->prev->n;
+	(*stack)->n = sum;
 	free((*stack)->prev);
 	(*stack)->prev = NULL;
 }
+
 
 /**
  * handle_mod_nodes - Adds the top two elements of the stack.
@@ -31,24 +27,18 @@ void handle_mul_nodes(stack_t **stack, unsigned int line)
  */
 void handle_mod_nodes(stack_t **stack, unsigned int line)
 {
-	int sumOperation;
+	int sum;
 
-	if (stack == NULL || *stack == NULL)
-	{
+	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
+
 		handle_more_error(8, line, "mod");
-	}
-	if ((*stack)->next == NULL)
-	{
-		handle_more_error(8, line, "mod");
-	}
+
 
 	if ((*stack)->n == 0)
-	{
 		handle_more_error(9, line);
-	}
 	(*stack) = (*stack)->next;
-	sumOperation = (*stack)->n % (*stack)->prev->n;
-	(*stack)->n = sumOperation;
+	sum = (*stack)->n % (*stack)->prev->n;
+	(*stack)->n = sum;
 	free((*stack)->prev);
 	(*stack)->prev = NULL;
 }

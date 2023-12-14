@@ -9,7 +9,7 @@ void handle_open_file(char *file_name)
 {
 	FILE *fd = fopen(file_name, "r");
 
-	if (file_name == NULL || fd == NULL)
+	if (file_name ==NULL || fd == NULL)
 	{
 		handle_error(2, file_name);
 	}
@@ -24,14 +24,13 @@ void handle_open_file(char *file_name)
  */
 void handle_read_line(FILE *fd)
 {
-	int line, file_format = 0;
+	int line_number, file_format = 0;
 	char *buffer = NULL;
 	size_t length = 0;
-	int hgetline = getline(&buffer, &length, fd);
 
-	for (line = 1; hgetline != -1; line++)
+	for (line_number = 1; getline(&buffer, &length, fd) != -1; line_number++)
 	{
-		file_format = handle_parse_line(buffer, line, file_format);
+		file_format = handle_parse_line(buffer, line_number, file_format);
 	}
 	free(buffer);
 }
@@ -39,33 +38,33 @@ void handle_read_line(FILE *fd)
 /**
  * handle_parse_line - tokenize each line
  * @buffer: File lines
- * @line: Line number
+ * @line_number: Line number
  * @format: Storage format
  * Return: 0 if stack, 1 if Queue
  */
-int handle_parse_line(char *buffer, int line, int format)
+int handle_parse_line(char *buffer, int line_number, int format)
 {
-	char *opcode, *token;
-	const char *delimiter = "\n ";
+	char *opcode, *value;
+	const char *delim = "\n ";
 
 	if (buffer == NULL)
 	{
 		handle_error(4);
 	}
-	opcode = strtok(buffer, delimiter);
+	opcode = strtok(buffer, delim);
 	if (opcode == NULL)
 		return (format);
-	token = strtok(NULL, delimiter);
+	value = strtok(NULL, delim);
 	if (strcmp(opcode, "queue") == 0)
-		return (1);
+		return(1);
 	if (strcmp(opcode, "stack") == 0)
-		return (0);
+		return(0);
 
-	handle_find_function(opcode, token, line, format);
+	handle_find_function(opcode, value, line_number, format);
 	return (format);
 }
 
-void handle_find_function(char *opcode, char *token, int line, int format)
+void handle_find_function(char *opcode, char *value, int line, int format)
 {
 	int i;
 	int flag;
@@ -86,14 +85,15 @@ void handle_find_function(char *opcode, char *token, int line, int format)
 		{"mul", handle_mul_nodes},
 		{"mod", handle_mod_nodes},
 		{"rotr", handle_rotr},
-		{NULL, NULL}};
+		{NULL, NULL}
+	};
 	if (opcode[0] == '#')
 		return;
 	for (flag = 1, i = 0; function_list[i].opcode != NULL; i++)
 	{
 		if (strcmp(opcode, function_list[i].opcode) == 0)
 		{
-			handle_call_function(function_list[i].f, opcode, token, line, format);
+			handle_call_function(function_list[i].f, opcode, value, line, format);
 			flag = 0;
 		}
 	}
@@ -104,34 +104,34 @@ void handle_find_function(char *opcode, char *token, int line, int format)
 /**
  * handle_call_function - calls the function required
  * @func: pointer to the function to call
- * @opcode: opcode
- * @token: numeric token
+ * @op: opcode
+ * @val: numeric value
  * @line: line number for the instruction
  * @format: Format specifier
  */
 
-void handle_call_function(op_func func, char *opcode, char *token, int line, int format)
+void handle_call_function(op_func func, char *op, char *val, int line, int format)
 {
 	stack_t *newNode;
 	int flag;
 	int i;
 
 	flag = 1;
-	if (strcmp(opcode, "push") == 0)
+	if (strcmp(op, "push") == 0)
 	{
-		if (token != NULL && token[0] == '-')
+		if (val != NULL && val[0] == '-')
 		{
-			token = token + 1;
+			val = val + 1;
 			flag = -1;
 		}
-		if (token == NULL)
+		if (val == NULL)
 			handle_error(5, line);
-		for (i = 0; token[i] != '\0'; i++)
+		for (i = 0; val[i] != '\0'; i++)
 		{
-			if (isdigit(token[i]) == 0)
+			if (isdigit(val[i]) == 0)
 				handle_error(5, line);
 		}
-		newNode = handle_create_node(atoi(token) * flag);
+		newNode = handle_create_node(atoi(val) * flag);
 		if (format == 0)
 			func(&newNode, line);
 		if (format == 1)

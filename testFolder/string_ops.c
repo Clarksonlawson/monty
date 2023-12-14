@@ -23,10 +23,11 @@ void handle_print_char(stack_t **stack, unsigned int line)
  * @stack: Double pointer pointing to top node of the stack.
  * @line: line number of of the opcode.
  */
-void handle_print_str(stack_t **stack, __attribute__((unused)) unsigned int line)
+void handle_print_str(stack_t **stack, unsigned int line)
 {
 	int ascII;
 	stack_t *tempNode;
+	(void)line;
 
 	if (stack == NULL || *stack == NULL)
 	{

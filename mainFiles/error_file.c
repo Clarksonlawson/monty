@@ -12,13 +12,13 @@ void handle_error(int err_code, ...)
 
 	va_start(args, err_code);
 
-	switch (err_code)
+	switch(err_code)
 	{
 		case 1:
 			fprintf(stderr, "USAGE: monty file\n");
 			break;
 		case 2:
-			fprintf(stderr, "Error: Can't open file %s\n", va_arg(args, char *));
+			fprintf(stderr, "Error: Can't open file %s\n",va_arg(args, char *));
 			break;
 		case 3:
 			line_num = va_arg(args, int);
@@ -48,7 +48,7 @@ void handle_more_error(int err_code, ...)
 	int line_num;
 
 	va_start(args, err_code);
-	switch (err_code)
+	switch(err_code)
 	{
 		case 6:
 			fprintf(stderr, "L%d: can't pint, stack empty\n", va_arg(args, int));
@@ -83,10 +83,10 @@ void handle_string_error(int err_code, ...)
 
 	va_start(args, err_code);
 	line_num = va_arg(args, int);
-	switch (err_code)
+	switch(err_code)
 	{
 		case 10:
-			fprintf(stderr, "L%d: can't pchar, value out of range\n", line_num);
+			fprintf(stderr,"L%d: can't pchar, value out of range\n", line_num);
 			break;
 		case 11:
 			fprintf(stderr, "L%d: can't pchar, stack empty\n", line_num);
