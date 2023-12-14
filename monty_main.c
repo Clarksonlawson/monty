@@ -1,5 +1,5 @@
 #include "monty.h"
-
+stack_t *head = NULL;
 /**
  * main - entry point
  * @argc: arguments count
@@ -9,8 +9,6 @@
 
 int main(int argc, char *argv[])
 {
-	stack_t *head = NULL;
-	(void) head;
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
