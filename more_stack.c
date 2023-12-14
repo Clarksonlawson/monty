@@ -11,9 +11,7 @@ stack_t *handle_create_node(int n)
 
 	newNode = malloc(sizeof(stack_t));
 	if (newNode == NULL)
-	{
 		handle_error(4);
-	}
 	newNode->next = NULL;
 	newNode->prev = NULL;
 	newNode->n = n;
@@ -25,43 +23,41 @@ stack_t *handle_create_node(int n)
  */
 void handle_free_nodes(void)
 {
-	stack_t *tempNode;
+	stack_t *temp;
 
 	if (head == NULL)
 		return;
 
 	while (head != NULL)
 	{
-		tempNode = head;
+		temp = head;
 		head = head->next;
-		free(tempNode);
+		free(temp);
 	}
 }
+
 
 /**
  * handle_add_to_queue - Adds a node to the queue.
  * @newNode: Pointer to the new node.
  * @line: line number of the opcode.
  */
-void handle_add_to_queue(stack_t **newNode, unsigned int line)
+void handle_add_to_queue(stack_t **newNode, __attribute__((unused))unsigned int line)
 {
-	stack_t *tempNode;
-	(void)line;
+	stack_t *temp;
 
 	if (newNode == NULL || *newNode == NULL)
-	{
 		exit(EXIT_FAILURE);
-	}
 	if (head == NULL)
 	{
 		head = *newNode;
 		return;
 	}
-	tempNode = head;
-	while (tempNode->next != NULL)
-	{
-		tempNode = tempNode->next;
-	}
-	tempNode->next = *newNode;
-	(*newNode)->prev = tempNode;
+	temp = head;
+	while (temp->next != NULL)
+		temp = temp->next;
+
+	temp->next = *newNode;
+	(*newNode)->prev = temp;
+
 }

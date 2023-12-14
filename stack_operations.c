@@ -6,24 +6,21 @@
  * @line: line number
  */
 
-void handle_add_to_stack(stack_t **newNode, unsigned int line)
+void handle_add_to_stack(stack_t **newNode, __attribute__((unused))unsigned int line)
 {
-	stack_t *tempNode;
-	(void)line;
+	stack_t *temp;
 
 	if (newNode == NULL || *newNode == NULL)
-	{
 		exit(EXIT_FAILURE);
-	}
 	if (head == NULL)
 	{
 		head = *newNode;
 		return;
 	}
-	tempNode = head;
+	temp = head;
 	head = *newNode;
-	head->next = tempNode;
-	tempNode->prev = head;
+	head->next = temp;
+	temp->prev = head;
 }
 
 /**
@@ -33,16 +30,16 @@ void handle_add_to_stack(stack_t **newNode, unsigned int line)
  */
 void handle_print_stack(stack_t **stack, unsigned int line)
 {
-	stack_t *tempNode;
-	(void)line;
+	stack_t *temp;
+	(void) line;
 
 	if (stack == NULL)
 		exit(EXIT_FAILURE);
-	tempNode = *stack;
-	while (tempNode != NULL)
+	temp = *stack;
+	while (temp != NULL)
 	{
-		printf("%d\n", tempNode->n);
-		tempNode = tempNode->next;
+		printf("%d\n", temp->n);
+		temp = temp->next;
 	}
 }
 /**
@@ -52,17 +49,15 @@ void handle_print_stack(stack_t **stack, unsigned int line)
  */
 void handle_pop_top(stack_t **stack, unsigned int line)
 {
-	stack_t *tempNode;
+	stack_t *temp;
 
 	if (stack == NULL || *stack == NULL)
-	{
 		handle_more_error(7, line);
-	}
-	tempNode = *stack;
-	*stack = tempNode->next;
+	temp = *stack;
+	*stack = temp->next;
 	if (*stack != NULL)
 		(*stack)->prev = NULL;
-	free(tempNode);
+	free(temp);
 }
 
 /**
@@ -73,8 +68,6 @@ void handle_pop_top(stack_t **stack, unsigned int line)
 void handle_print_top(stack_t **stack, unsigned int line)
 {
 	if (stack == NULL || *stack == NULL)
-	{
 		handle_more_error(6, line);
-	}
 	printf("%d\n", (*stack)->n);
 }
