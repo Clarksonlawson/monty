@@ -40,41 +40,41 @@ typedef struct instruction_s
 } instruction_t;
 
 stack_t *head;
-typedef void(*op_func)(stack_t **, unsigned int);
+typedef void (*op_func)(stack_t **, unsigned int);
 
 /**Stack ops**/
-void handle_free_nodes(void);
-stack_t *handle_create_node(int n);
-void handle_print_stack(stack_t **, unsigned int);
-void handle_add_to_stack(stack_t **, unsigned int);
-void handle_add_to_queue(stack_t **, unsigned int);
-void handle_call_function(op_func, char *, char *, int, int);
-void handle_print_top(stack_t **, unsigned int);
-void handle_pop_top(stack_t **, unsigned int);
-void handle_nop(stack_t **, unsigned int);
-void handle_swap_nodes(stack_t **, unsigned int);
+void freeStackNodes(void);
+stack_t *createNewNode(int n);
+void printNode_toStack(stack_t **);
+void addNode_toStack(stack_t **);
+void addNodeToQueue(stack_t **);
+void call_OpsFunction(op_func, char *, char *, int, int);
+void print_stackTopNode(stack_t **, unsigned int);
+void remove_lastStackItem(stack_t **, unsigned int);
+void does_nothing(stack_t **);
+void swapTopTwo_Elements(stack_t **, unsigned int);
 
 /**File ops**/
-void handle_open_file(char *file_name);
-int handle_parse_line(char *buffer, int line_number, int format);
-void handle_read_line(FILE *);
+void open_montyFile(char *file_name);
+int parse_montyFileLines(char *buffer, int line_number, int format);
+void read_montyFileLines(FILE *);
 int handle_len_chars(FILE *);
-void handle_find_function(char *, char *, int, int);
+void get_correctFunction(char *, char *, int, int);
 
 /**Error functions **/
 void handle_error(int err_code, ...);
 void handle_more_error(int err_code, ...);
 void handle_string_error(int err_code, ...);
-void handle_rotr(stack_t **, unsigned int);
+void rotate_last_node(stack_t **);
 /**string ops**/
-void handle_print_char(stack_t **, unsigned int);
-void handle_print_str(stack_t**, unsigned int);
-void handle_rotl(stack_t **, unsigned int);
+void print_ascii_char(stack_t **, unsigned int);
+void print_stack_string(stack_t **);
+void rotate_first_func(stack_t **);
 /**Math Ops **/
-void handle_add_nodes(stack_t **, unsigned int);
-void handle_sub_nodes(stack_t **, unsigned int);
-void handle_div_nodes(stack_t **, unsigned int);
-void handle_mul_nodes(stack_t **, unsigned int);
-void handle_mod_nodes(stack_t **, unsigned int);
+void addsNewNodeToStack(stack_t **, unsigned int);
+void Subtracts_toTwoNodes(stack_t **, unsigned int);
+void divide_topTwoNodes(stack_t **, unsigned int);
+void multiply_stackToptwo(stack_t **, unsigned int);
+void compute_ElemementMode(stack_t **, unsigned int);
 
 #endif
