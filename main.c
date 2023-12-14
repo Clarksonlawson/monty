@@ -68,6 +68,10 @@ void parse_and_execute(FILE *f, char *line, stack_t **stack, unsigned int *ln)
 	{
 		nop(stack, *ln);
 	}
+	else if (strcmp(opcode, "div") == 0)
+	{
+		div(stack, *ln);
+	}
 	else if (strcmp(opcode, "sub") == 0)
 	{
 		sub(stack, *ln);

@@ -82,25 +82,6 @@ void add(stack_t **stack, unsigned int line_number)
  */
 void nop(stack_t **stack, unsigned int line_number)
 {
-    (void)stack;
-    (void)line_number;
-    
-}
-/**
- * sub - Subtracts the top element of the stack from the second top element.
- * @stack: A pointer to the top of the stack.
- * @line_number: The line number in the Monty bytecode file.
- */
-void sub(stack_t **stack, unsigned int line_number)
-{
-	int result;
-	if (*stack == NULL || (*stack)->next == NULL)
-	{
-		fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-
-	result = ((*stack)->next)->n - (*stack)->n;
-	pop(stack, line_number);
-	(*stack)->n = result;
+	(void)stack;
+	(void)line_number;
 }
