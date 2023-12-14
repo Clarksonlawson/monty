@@ -64,6 +64,10 @@ void parse_and_execute(FILE *f, char *line, stack_t **stack, unsigned int *ln)
 	{
 		add(stack, *ln);
 	}
+	else if (strcmp(opcode, "nop") == 0)
+	{
+		nop(stack, *ln);
+	}
 	else
 	{
 		handle_error(f, line, *stack, "L", *ln);

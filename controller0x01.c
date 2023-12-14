@@ -75,3 +75,14 @@ void add(stack_t **stack, unsigned int line_number)
 	(*stack)->next->n = sum;
 	pop(stack, line_number);
 }
+/**
+ * nop - Adds the top two elements of the stack.
+ * @stack: A pointer to the top of the stack.
+ * @line_number: The line number in the Monty bytecode file.
+ */
+void nop(stack_t **stack, unsigned int line_number)
+{
+    (void)stack;
+    (void)line_number;
+    
+}
