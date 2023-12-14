@@ -76,6 +76,10 @@ void parse_and_execute(FILE *f, char *line, stack_t **stack, unsigned int *ln)
 	{
 		sub(stack, *ln);
 	}
+	else if (strcmp(opcode, "mul") == 0)
+	{
+		mul(stack, *ln);
+	}
 	else
 	{
 		handle_error(f, line, *stack, "L", *ln);
