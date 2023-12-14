@@ -46,3 +46,30 @@ void rotl(stack_t **stack, unsigned int line_number)
 	temp->next = NULL;
 }
 
+/**
+ * rotr - Rotates the stack to the bottom.
+ * @stack: A pointer to the top of the stack.
+ * @line_number: The line number in the Monty bytecode file.
+ */
+void rotr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp, *last;
+
+	(void)line_number;
+
+	if (*stack == NULL || (*stack)->next == NULL)
+		return;
+
+	temp = *stack;
+	last = *stack;
+
+	while (last->next != NULL)
+		last = last->next;
+
+	last->next = temp;
+	temp->prev = last;
+	*stack = temp->next;
+	(*stack)->prev = NULL;
+	temp->next = NULL;
+}
+
