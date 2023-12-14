@@ -26,9 +26,16 @@ void handle_error(FILE *f, char *l, stack_t *s, const char *m, unsigned int ln)
  */
 void parse_and_execute(FILE *f, char *line, stack_t **stack, unsigned int *ln)
 {
-	char *opcode, *arg;
+	char *opcode, *arg;	
+
+
+	while (*line == ' ')
+		line++;
 
 	opcode = strtok(line, " \t\n");
+
+	if (*line == '#' || *line == '\n' || *line == '\0')
+		return;	
 
 	if (opcode == NULL || *opcode == '#')
 		return;

@@ -1,14 +1,14 @@
 #include "monty.h"
 
 /**
- * div - Divides the second top element of the stack by the top element.
+ * div_op - Divides the second top element of the stack by the top element.
  * @stack: A pointer to the top of the stack.
  * @line_number: The line number in the Monty bytecode file.
  */
 void div_op(stack_t **stack, unsigned int line_number)
 {
 	int result;
-    int divisor;
+	int divisor;
 
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
