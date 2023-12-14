@@ -91,6 +91,10 @@ void parse_and_execute(FILE *f, char *line, stack_t **stack, unsigned int *ln)
 	{
 		pchar(stack, *ln);
 	}
+	else if (strcmp(opcode, "pstr") == 0)
+	{
+		pstr(stack, *ln);
+	}
 	else if (strcmp(opcode, "mul") == 0)
 	{
 		mul(stack, *ln);
