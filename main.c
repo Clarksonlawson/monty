@@ -99,6 +99,10 @@ void parse_and_execute(FILE *f, char *line, stack_t **stack, unsigned int *ln)
 	{
 		mul(stack, *ln);
 	}
+	else if (strcmp(opcode, "rotl") == 0)
+	{
+		rotl(stack, *ln);
+	}
 	else
 	{
 		handle_error(f, line, *stack, "L", *ln);
