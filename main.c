@@ -68,6 +68,10 @@ void parse_and_execute(FILE *f, char *line, stack_t **stack, unsigned int *ln)
 	{
 		nop(stack, *ln);
 	}
+	else if (strcmp(opcode, "sub") == 0)
+	{
+		sub(stack, *ln);
+	}
 	else
 	{
 		handle_error(f, line, *stack, "L", *ln);
