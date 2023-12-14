@@ -70,7 +70,7 @@ void get_correctFunction(char *opcode, char *tokenValue, int line, int format)
 	int i;
 	int flag;
 
-	instruction_t operation_functions[] = {
+	instruction_t function_list[] = {
 		{"push", addNode_toStack},
 		{"pall", printNode_toStack},
 		{"pint", print_stackTopNode},
@@ -89,11 +89,11 @@ void get_correctFunction(char *opcode, char *tokenValue, int line, int format)
 		{NULL, NULL}};
 	if (opcode[0] == '#')
 		return;
-	for (flag = 1, i = 0; operation_functions[i].opcode != NULL; i++)
+	for (flag = 1, i = 0; function_list[i].opcode != NULL; i++)
 	{
-		if (strcmp(opcode, operation_functions[i].opcode) == 0)
+		if (strcmp(opcode, function_list[i].opcode) == 0)
 		{
-			call_OpsFunction(operation_functions[i].f, opcode, tokenValue, line, format);
+			call_OpsFunction(function_list[i].f, opcode, tokenValue, line, format);
 			flag = 0;
 		}
 	}
