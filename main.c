@@ -107,6 +107,14 @@ void parse_and_execute(FILE *f, char *line, stack_t **stack, unsigned int *ln)
 	{
 		rotr(stack, *ln);
 	}
+	else if (strcmp(opcode, "stack") == 0)
+	{
+		stack_op(stack, *ln);
+	}
+	else if (strcmp(opcode, "queue") == 0)
+	{
+		queue(stack, *ln);
+	}
 	else
 	{
 		handle_error(f, line, *stack, "L", *ln);

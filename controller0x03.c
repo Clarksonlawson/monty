@@ -72,4 +72,25 @@ void rotr(stack_t **stack, unsigned int line_number)
 	(*stack)->prev = NULL;
 	temp->next = NULL;
 }
+/**
+ * stack_op - Sets the format of the data to a stack (LIFO).
+ * @stack: A pointer to the top of the stack.
+ * @line_number: The line number in the Monty bytecode file.
+ */
+void stack_op(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+}
+
+/**
+ * queue - Sets the format of the data to a queue (FIFO).
+ * @stack: A pointer to the top of the stack.
+ * @line_number: The line number in the Monty bytecode file.
+ */
+void queue(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+}
 
