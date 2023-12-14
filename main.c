@@ -70,7 +70,7 @@ void parse_and_execute(FILE *f, char *line, stack_t **stack, unsigned int *ln)
 	}
 	else if (strcmp(opcode, "div") == 0)
 	{
-		div(stack, *ln);
+		div_op(stack, *ln);
 	}
 	else if (strcmp(opcode, "sub") == 0)
 	{
